@@ -5,25 +5,20 @@ function CLASS.Off(self)
 end
 
 local masks = {
-    "arctic_balaclava",
-    "phoenix_balaclava",
-    "bandana"
+    "models/player/arctic.mdl",
+    "models/player/phoenix.mdl",
+    "models/player/leet.mdl",
+    "models/player/guerilla.mdl"
 }
 
 function CLASS.On(self)
     if CLIENT then return end
     ApplyAppearance(self,nil,nil,nil,true)
-    timer.Simple(.1,function()
-        local Appearance = self.CurAppearance or hg.Appearance.GetRandomAppearance()
-
-        Appearance.AAttachments = {
-            masks[math.random(#masks)],
-            "terrorist_band"
-        }
-        self:SetNetVar("Accessories", Appearance.AAttachments or "none")
-        
-        self.CurAppearance = Appearance
-    end)
+    local Appearance = self.CurAppearance or hg.Appearance.GetRandomAppearance()
+    Appearance.AAttachments = ""
+    Appearance.AColthes = ""
+    self:SetPlayerColor(Color(165,0,0):ToVector())
+    self:SetModel(models[math.random(#models)])
 end
 
 function CLASS.Guilt(self, victim)
