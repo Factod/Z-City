@@ -33,7 +33,8 @@ timer.Create("ZB_AntiAfkThink",10,0,function()
         if ply.organism.otrub then ply.afkTime = 0 end
         
         if ply.afkTime > AfkToSpectTime and ply:Team() ~= TEAM_SPECTATOR and ply:Alive() then
-            if ply:Alive() then ply:Kill() end 
+            if ply:Alive() then ply:Kill() end
+            ply:EmitSound("afkgaysex.mp3")
             ply:SetTeam(TEAM_SPECTATOR)
             PrintMessage(HUD_PRINTTALK, ply:Name().." joined the spectators, because he was AFK.")
         end
