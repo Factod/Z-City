@@ -4,7 +4,7 @@ function CLASS.Off(self)
     if CLIENT then return end
 end
 
-local masks = {
+local models = {
     "models/player/arctic.mdl",
     "models/player/phoenix.mdl",
     "models/player/leet.mdl",
