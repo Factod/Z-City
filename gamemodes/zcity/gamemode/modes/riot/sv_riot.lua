@@ -51,6 +51,7 @@ util.AddNetworkString("riot_roundend")
 function MODE:Intermission()
     game.CleanUpMap()
 
+<<<<<<< HEAD
 
     self.RiotPoints = {}
     table.CopyFromTo(zb.GetMapPoints("RIOT_TDM_LAW"), self.RiotPoints)
@@ -86,6 +87,12 @@ function MODE:Intermission()
 		if pos then
 			ply:SetPos(pos)
 		end
+=======
+	for i, ply in player.Iterator() do
+		if ply:Team() == TEAM_SPECTATOR then continue end
+
+		ply:SetupTeam(ply:Team())
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 	end
 
     net.Start("riot_start")
@@ -240,15 +247,26 @@ function MODE:CanLaunch()
             activePlayers = activePlayers + 1
         end
     end
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
     if activePlayers < 5 then
         return false
     end
 
+<<<<<<< HEAD
     local pointsRioters = zb.GetMapPoints("RIOT_TDM_RIOTERS")
     local pointsLaw = zb.GetMapPoints("RIOT_TDM_LAW")
     return (#pointsRioters > 0) and (#pointsLaw > 0)
+=======
+    return true
+    --[[local pointsRioters = zb.GetMapPoints("RIOT_TDM_RIOTERS")
+    local pointsLaw = zb.GetMapPoints("RIOT_TDM_LAW")
+    return (#pointsRioters > 0) and (#pointsLaw > 0)--]]
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 end
 
 return MODE

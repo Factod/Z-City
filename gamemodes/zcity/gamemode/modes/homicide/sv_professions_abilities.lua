@@ -15,7 +15,11 @@ function MODE.DisplayOrganismInfo(organism, ply)
 end
 
 --\\
+<<<<<<< HEAD
 hook.Add("PlayerFootstep", "HMCD_Professions_Abilities", function(ply, pos, foot, snd, volume, filter)
+=======
+hook.Add("HG_PlayerFootstep_Notify", "HMCD_Professions_Abilities", function(ply, pos, foot, snd, volume, filter)
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 	ply.ProfessionAbility_FootstepsAmt = ply.ProfessionAbility_FootstepsAmt or 0
 	ply.ProfessionAbility_FootstepsAmt = ply.ProfessionAbility_FootstepsAmt + 1
 	
@@ -27,6 +31,7 @@ hook.Add("PlayerFootstep", "HMCD_Professions_Abilities", function(ply, pos, foot
 			net.WriteFloat(ply:EyeAngles().y)
 			net.WriteBool(foot == 0)
 			
+<<<<<<< HEAD
 			local appearance = ply.Appearance
 			
 			if(!appearance)then
@@ -37,6 +42,12 @@ hook.Add("PlayerFootstep", "HMCD_Professions_Abilities", function(ply, pos, foot
 			
 			if(!IsColor(character_color))then
 				character_color = Color(character_color.r, character_color.g, character_color.b)	--; WARNING CONFIRM
+=======
+			local character_color = ply:GetNWVector("PlayerColor")
+			
+			if(!IsColor(character_color))then
+				character_color = Color(character_color[1] * 255, character_color[2] * 255, character_color[3] * 255)
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 			end
 			
 			net.WriteColor(character_color, false)

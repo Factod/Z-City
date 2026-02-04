@@ -1292,6 +1292,7 @@ hook.Add("PlayerDeath","I_Feel_Death",function(ply)
 end)
 
 hook.Add("PostEntityTakeDamage", "GlassShards", function(ent, dmginfo)
+<<<<<<< HEAD
 	if ent:GetClass() ~= "func_breakable_surf" then return end
 	if math.random(10) == 5 then
 		local glass = ents.Create("weapon_hg_glassshard")
@@ -1303,6 +1304,20 @@ hook.Add("PostEntityTakeDamage", "GlassShards", function(ent, dmginfo)
 		glass.init = true
 		--Player(2):SetPos(IsValid(inf) and inf:GetPos() or dmginfo:GetAttacker():GetPos())
 		--print(ent, glass) -- bro im spawned and etc.
+=======
+	if IsValid(ent) and math.random(4) == 2 then
+		if ent:GetClass() == "func_breakable_surf" or (ent:GetClass() == "func_breakable" and ent:GetMaterialType() == MAT_GLASS) then
+			local glass = ents.Create("weapon_hg_glassshard")
+			local inf = dmginfo:GetInflictor()
+			glass:SetPos(IsValid(inf) and inf:GetPos() or dmginfo:GetAttacker():GetPos())
+			glass:SetAngles(AngleRand(-180, 180))
+			glass:Spawn()
+			glass.IsSpawned = true
+			glass.init = true
+			--Player(2):SetPos(IsValid(inf) and inf:GetPos() or dmginfo:GetAttacker():GetPos())
+			--print(ent, glass) -- bro im spawned and etc.
+		end
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 	end
 end)
 
@@ -1490,7 +1505,11 @@ local warmingEnts = {
 	["vfire"] = 15,
 }
 
+<<<<<<< HEAD
 hg.MapTemps = {
+=======
+hg.ColdMapsTemp = {
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 	["gm_wintertown"] = -10,
 	["cs_drugbust_winter"] = -10,
 	["cs_office"] = -10,
@@ -1504,6 +1523,7 @@ hg.MapTemps = {
 	["mu_riverside_snow"] = -10,
 	["gm_fork_north"] = -16,
 	["gm_fork_north_day"] = -21,
+<<<<<<< HEAD
 	["gm_ijm_boreas"] = -40,
 	["gm_construct"] = 40 -- тест температуры
 }
@@ -1514,17 +1534,36 @@ hook.Add("Org Think", "BodyTemperature", function(owner, org, timeValue) -- пе
 
 	if (owner.CheckTemp or 0) > CurTime() then return end
 	owner.CheckTemp = CurTime() + 0.5--optimization update
+=======
+	["gm_ijm_boreas"] = -40
+}
+
+hook.Add("Org Think", "ColdMaps", function(owner, org, timeValue)
+	if not owner:IsPlayer() or not owner:Alive() then return end
+	if owner.GetPlayerClass and owner:GetPlayerClass() and owner:GetPlayerClass().NoFreeze then return end
+
+	if (owner.CheckCold or 0) > CurTime() then return end
+	owner.CheckCold = CurTime() + 0.5--optimization update
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 	local timeValue = 0.5
 	local ent = hg.GetCurrentCharacter(owner)
 	local IsVisibleSkyBox = util.TraceLine( {
 		start = ent:GetPos() + vector_up * 15,
 		endpos = ent:GetPos() + vector_up * 999999,
 		mask = MASK_SOLID_BRUSHONLY
+<<<<<<< HEAD
 	} ).HitSky and hg.TemperatureMaps[game.GetMap()]
 	org.temperature = org.temperature or 36.7
 	local currentPulse = org.pulse or 70
 	local pulseHeat = 0
 	local temp = hg.MapTemps[game.GetMap()] or -10
+=======
+	} ).HitSky and hg.ColdMaps[game.GetMap()]
+	org.temperature = org.temperature or 36.7
+	local currentPulse = org.pulse or 70
+	local pulseHeat = 0
+	local temp = hg.ColdMapsTemp[game.GetMap()] or -10
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 
 	if currentPulse > 80 then
 		local pulseMultiplier = math.min((currentPulse - 70) / 100, 1.2)
@@ -1532,6 +1571,7 @@ hook.Add("Org Think", "BodyTemperature", function(owner, org, timeValue) -- пе
 	end
 
 	if IsVisibleSkyBox and !owner:InVehicle() then
+<<<<<<< HEAD
 		local changeRate = timeValue / 1500
 
 		local isFreezing = org.temperature < 35 and org.temperature > 24
@@ -1543,10 +1583,19 @@ hook.Add("Org Think", "BodyTemperature", function(owner, org, timeValue) -- пе
 		-- При холоде
 		org.FreezeSndCD = org.FreezeSndCD or CurTime() + 5
 		if org.FreezeSndCD < CurTime() and owner:Alive() and not org.otrub and isFreezing then
+=======
+		local freezeRate = timeValue / 1500
+
+		org.freezing = true
+		org.temperature = Lerp(freezeRate, org.temperature, temp * 1)
+		org.FreezeSndCD = org.FreezeSndCD or CurTime() + 5
+		if org.FreezeSndCD < CurTime() and owner:Alive() and not org.otrub then
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 			org.FreezeSndCD = CurTime() + math.random(30,55)
 			ent:EmitSound("zcitysnd/"..(ThatPlyIsFemale(ent) and "fe" or "").."male/freezing_"..math.random(1,8)..".mp3",65)
 		end
 		org.FreezeDMGCd = org.FreezeDMGCd or CurTime()
+<<<<<<< HEAD
 		if isFreezing and org.FreezeDMGCd < CurTime() then
 			org.painadd = org.painadd + math.Rand(0,1) * ((35 - org.temperature) / 35 * 4 + 1)
 			org.FreezeDMGCd = CurTime() + 0.5
@@ -1569,6 +1618,14 @@ hook.Add("Org Think", "BodyTemperature", function(owner, org, timeValue) -- пе
 		end
 	else
 		org.tempchanging = false
+=======
+		if org.temperature < 35 and org.temperature > 24 and org.FreezeDMGCd < CurTime()  then
+			org.painadd = org.painadd + math.Rand(0,1) * ((35 - org.temperature) / 35 * 4 + 1)
+			org.FreezeDMGCd = CurTime() + 0.5
+		end
+	else
+		org.freezing = false
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 	end
 
 	for i, ent in ipairs(ents.FindInSphere(owner:GetPos(), 200)) do
@@ -1582,6 +1639,10 @@ hook.Add("Org Think", "BodyTemperature", function(owner, org, timeValue) -- пе
 	--дороговато
 end)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 hook.Add("SetupMove","hg_FallSound",function(ply)
 	--if not ply then return end
 	local ent = IsValid(ply.FakeRagdoll) and ply.FakeRagdoll or ply

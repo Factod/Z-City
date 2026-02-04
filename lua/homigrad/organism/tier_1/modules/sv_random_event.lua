@@ -44,7 +44,11 @@ local RandomEvents = {
             end)
         end) -- жаль что сломалось, а ради этого неты делать ну, такое... | update уже неважно
     end,
+<<<<<<< HEAD
 }
+=======
+} 
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 
 function module.TriggerRandomEvent(owner, eventName)
     if RandomEvents[eventName] then
@@ -72,6 +76,7 @@ hook.Add("Org Think", "VirusRandomEvents", function(owner, org, timeValue)
             owner.NextVirusRandomEventTime = CurTime() + math.random(10, 15)
         end
     end
+<<<<<<< HEAD
 end)
 
 hook.Add("Org Think", "TemperatureSounds", function(owner, org, timeValue) -- добавил звуки при низкой температуре Ж))
@@ -83,4 +88,6 @@ hook.Add("Org Think", "TemperatureSounds", function(owner, org, timeValue) -- д
             owner.ColdRandomEventTime = CurTime() + math.random(math.Remap(org.temperature, 35, 24, 60, 15), math.Remap(org.temperature, 35, 24, 120, 30))
         end
     end
+=======
+>>>>>>> d52f111c617d26586873c5579ed7f2da1efa0c8c
 end)

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Z-City
 Z-City is a GMod addon which modifies character damage and controls. Z-City also comes with its own weapon base and a gamemode
 
@@ -15,7 +14,8 @@ A.Bcc -> 1.000
 - A -> Global updates
 - B -> New mechanics, gameplay changes
 - c -> Fixes and other small things
+
 =======
-# c4-city
-For my personal updates on Z-City, a Garry's Mod addon I like a lot.
->>>>>>> 2bfca829e934d1b03c36925811dda40a09cf6b43
+
+# By c4nk, C4-City
+This fork was made to contribute to the popular GMod addon 'Z-City', try it out!
