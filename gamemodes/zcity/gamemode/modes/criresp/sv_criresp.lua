@@ -215,7 +215,7 @@ function MODE:GiveEquipment()
 				ply:SetSuppressPickupNotices(true)
 				ply.noSound = true
 
-				ply:SetPlayerClass("terrorist")
+				ply:SetPlayerClass("bandit")
 
 				zb.GiveRole(ply, "Suspect", Color(190,0,0))
 
