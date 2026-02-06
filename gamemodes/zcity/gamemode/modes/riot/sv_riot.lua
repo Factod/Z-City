@@ -116,7 +116,7 @@ function MODE:GiveEquipment()
     
         ply:SetupTeam(0)
 
-        ply:SetPlayerClass("terrorist")
+        ply:SetPlayerClass("bandit")
     
     
         zb.GiveRole(ply, "Rioter", Color(190, 0, 0))
