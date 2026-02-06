@@ -1,5 +1,5 @@
 --
-local AfkToSpectTime = 300
+local AfkToSpectTime = 60
 
 local function stopAFK(ply)
     if not IsValid(ply) then return end
